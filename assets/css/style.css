@@ -58,3 +58,7 @@ table, td, th {
     background-color: orange;
     padding: 5px 40px;
   }
+  
+  .containerdosveiculos {
+    opacity: 0.1;
+  }

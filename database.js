@@ -11,6 +11,11 @@ database.con = await mysql.createConnection({
 })
 
 
+database.getPlaca = async function (placa) {
+  let [rows, fields] = await database.con.execute('SELECT * FROM carros WHERE placa = ? ORDER BY data asc', [placa]);
+
+  return rows;
+}
 
 
 

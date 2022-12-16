@@ -7,7 +7,7 @@
         <title>Cadastro de Veículos</title>
         <link rel="shortcut icon" href="assets/img/placa-stop1.png"/>
         <link rel="stylesheet" href="style.css">
-        <script src="inicio.js"></script>
+        <script src="inicio.js" defer></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     </head>
@@ -20,12 +20,12 @@
                     <div class="card-body">
                         <h3 class="card-title"><b><img src="placa-stop1.png" height="50px"/> Bem-vindo!</b></h3>
                         <p class="card-text">Procure por uma placa ou cadastre um novo veículo no sistema.</p>
-                        <form action="/placas" method="get">
+                        <form id="formpesquisa">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Placa" aria-describedby="button-addon2" maxlength="7" minlength="7" required name="consultaplaca">
-                                <button class="btn btn-outline-success" type="submit" id="button-addon2" style="padding: 0px 10px!important;font-size: 18pt;"><i class="bi bi-arrow-right-circle-fill"></i></button>
+                            <input type="text" class="form-control" placeholder="Placa" maxlength="7" minlength="7" name="consultaplaca">
+                             </form>    
+                            <button class="btn btn-outline-success" id="pesquisar" style="padding: 0px 10px!important;font-size: 18pt;"><i class="bi bi-arrow-right-circle-fill"></i></button>
                                 </div>
-                        </form>
                         <div class="botao" style="text-align-last: center;">
                         <a href="/lista" class="btn btn-primary" style="background: #00BFFF; border: none;">Ver Lista</a>
                         </div>
