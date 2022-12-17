@@ -28,3 +28,38 @@ function preencheformulario(vplaca, vmodelo, vnome, vtelefone) {
 
     document.querySelector(".containerdosveiculos").style.opacity = "1"
 }
+
+document.querySelector("#enviar").addEventListener("click", enviando)
+
+async function enviando(event){
+    event.preventDefault();
+
+    let formv = document.querySelector("#veiculos");
+
+    let fplaca = formv.placa.value;
+    let fveiculo = formv.veiculo.value;
+    let fitens = formv.itens.value;
+    let fkm = formv.km.value;
+    let fcliente = formv.cliente.value;
+    let ftelefone = formv.telefone.value;
+
+
+    let header = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            placa: fplaca,
+            veiculo: fveiculo,
+            itens: fitens,
+            km: fkm,
+            cliente: fcliente,
+            telefone: ftelefone
+        })
+    }
+    let resposta = await fetch('/carros/', header);
+    resposta = await resposta.json();
+
+    document.location = "/";
+}

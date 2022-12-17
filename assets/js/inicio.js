@@ -10,3 +10,24 @@ async function pesquisando(event) {
     document.location = "/veiculos?placa=" + placa;
 
 }
+
+qtd();
+
+
+async function qtd(){
+ 
+    fetch('/qtd')
+        .then((res) => res.json())
+        .then((res) => {
+            for (qtdade of res) {
+                preencheformulario(qtdade.quantidade);
+            }
+
+        })
+
+}
+
+async function preencheformulario(qtd){
+
+    document.querySelector(".qtd").textContent = qtd + " veículos cadastrados";
+}

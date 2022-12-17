@@ -40,20 +40,6 @@ footer a:hover{
   }
 }
 
-table, td, th {
-    border: none;
-    padding: 5px;
-    text-align: center;
-    box-shadow: 0.2px 2px black;
-    color: rgb(39, 39, 39);
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    text-transform: uppercase;
-  }
   .edit{
     background-color: orange;
     padding: 5px 40px;
@@ -61,4 +47,8 @@ table, td, th {
   
   .containerdosveiculos {
     opacity: 0.1;
+  }
+
+  .lista1{
+    text-transform: uppercase;
   }
