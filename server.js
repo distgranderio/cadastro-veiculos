@@ -87,7 +87,15 @@ app.get('/', (req, res) => {
   
   });
 
+  app.get('/trocadetalhe/:id', async (req, res) => {
+    let placa = req.params.id;
+    res.send(await database.getPlaca1(placa))
+    });
 
+    app.get('/pesquisar/:id', async (req, res) => {
+      let placa = req.params.id;
+      res.send(await database.pesqcarro(placa))
+      });
 
   async function robo1(placa) {
     let placaaux = placa.toUpperCase();

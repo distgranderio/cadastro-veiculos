@@ -52,3 +52,12 @@ footer a:hover{
   .lista1{
     text-transform: uppercase;
   }
+  .bd-example-modal-lg .modal-content{
+    padding: 30px;
+  }
+  .card{
+    margin-bottom: 30px;
+  }
+  .card-text{
+    line-height: 30px;
+  }

@@ -17,6 +17,12 @@ database.getPlaca = async function (placa) {
   return rows;
 }
 
+database.getPlaca1 = async function (placa) {
+  let [rows, fields] = await database.con.execute('SELECT * FROM carros WHERE placa = ? ORDER BY data desc', [placa]);
+
+  return rows;
+}
+
 database.getAll = async function () {
   let [rows, fields] = await database.con.execute('SELECT DISTINCT * FROM carros GROUP BY placa ORDER BY placa asc');
 
@@ -28,6 +34,12 @@ database.postCarro = async function (placa, veiculo, itens, km, cliente, telefon
 
   return rows;
 }
+database.pesqcarro = async function (placa) {
+  let [rows, fields] = await database.con.execute('SELECT DISTINCT * FROM carros WHERE placa LIKE CONCAT("%", ?,  "%") OR modelo LIKE CONCAT("%", ?,  "%") GROUP BY placa ORDER BY placa asc ', [placa, placa]);
+
+  return rows;
+}
+
 
 
 export default database;
