@@ -2,18 +2,18 @@ carregarTrocas();
 
 async function carregarTrocas(){
    
-    fetch('/trocas')
+    fetch('/trocasv')
         .then((res) => res.json())
         .then((res) => {
             for (trocar of res) {
-                preencheformulario(trocar.id, trocar.placa, trocar.modelo, trocar.data, trocar.cliente);
+                preencheformulario(trocar.id, trocar.placa, trocar.modelo, trocar.data, trocar.cliente, trocar.aviso, trocar.telefone);
             }
 
         })
 
 }
 
-function preencheformulario(id, placa, modelo, data, cliente){
+function preencheformulario(id, placa, modelo, data, cliente, aviso, telefone){
 
 
     let gdata = data.split("T");
@@ -25,6 +25,7 @@ function preencheformulario(id, placa, modelo, data, cliente){
     let clientetabela = document.createElement("td");
     let placatabela = document.createElement("td");
     let botaotabela = document.createElement("td");
+    let msg1 = document.createElement("td");
 
     datatabela.innerHTML = datamesmo;
     clientetabela.innerHTML = cliente;
@@ -42,44 +43,43 @@ function preencheformulario(id, placa, modelo, data, cliente){
     botaotabela.addEventListener("click", gettrocaplaca)
     botaotabela.setAttribute("id", placa);
     botaotabela.style.cursor = "pointer";
+    var msg = document.createElement("i");
+    if (aviso == 0) {
+        msg.className = "bi bi-envelope-plus-fill";
+        msg.style.color = "orange";
+        msg.style.fontSize = "14pt";
+        msg.style.cursor = "pointer";
+        msg.setAttribute("id", id);
+        msg.addEventListener("click", mandarmsg);
+    }
+    if(telefone == ""){
+        linha.style.opacity = "0.1"
+    }
     linha.appendChild(datatabela);
     linha.appendChild(clientetabela);
     linha.appendChild(placatabela);
     linha.appendChild(botaotabela);
+    msg1.appendChild(msg);
+    linha.appendChild(msg1);
 
     document.querySelector(".lista1").appendChild(linha)
 
 }
 
-document.querySelector("#pesquisa").addEventListener("click", pesquisando)
-
-async function pesquisando(event){
-    event.preventDefault();
-
-
-    var elemento = document.querySelector(".lista1");
-    while (elemento.firstChild) {
-        elemento.removeChild(elemento.firstChild);
-    }
-
-    let pesquisa = document.querySelector("#termo").value;
-
-    if (pesquisa == "") {
-        carregarTrocas();
-    }else{
-    await fetch('/pesquisar/' + pesquisa)
-        .then((res) => res.json())
-        .then((res) => {
-            for (veiculo2 of res) {
-                preencheformulario(veiculo2.id, veiculo2.placa, veiculo2.modelo, veiculo2.data, veiculo2.cliente);
-
-            }
-
+async function mandarmsg() {
+    let auxcliente = this.getAttribute("id");
+    let header = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            idag: auxcliente
         })
     }
-
-} 
-
+    let resposta = await fetch('/aviso/', header);
+    location.reload();
+}
 
 async function gettrocaplaca(){
     let auxplacao = this.getAttribute("id");

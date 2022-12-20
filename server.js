@@ -40,6 +40,10 @@ app.get('/', (req, res) => {
     res.header('Content-Type', 'text/html');
     res.sendFile(__dirname + '/veiculos.html');
   })
+  app.get('/vencidos', (req, res) => {
+    res.header('Content-Type', 'text/html');
+    res.sendFile(__dirname + '/vencidos.html');
+  })
 
   app.get('/placas/:placa', async (req, res) => {
    let pplaca = await database.getPlaca(req.params.placa);
@@ -64,6 +68,9 @@ app.get('/', (req, res) => {
    app.get('/trocas', async (req, res) => {
    res.send(await database.getAll()); 
    })
+   app.get('/trocasv', async (req, res) => {
+    res.send(await database.getAllv()); 
+    })
 
    app.post('/carros', async (req, res) => {
     let {placa, veiculo, itens, km, cliente, telefone} = req.body;
@@ -206,3 +213,42 @@ app.get('/', (req, res) => {
   
     return campos;
   }}
+
+  
+
+  app.post('/aviso/', async (req, res) => {
+    let {
+      idag
+    } = req.body;
+    let respostaaviso = await database.getaviso(idag);
+    res.status(201).send(await database.alteraraviso(respostaaviso[0].placa));
+    if(respostaaviso[0].telefone != ""){
+          let menssage = "📅 *FAZ UM TEMPINHO!*\n\n Que você não aparece para trocar o óleo do veículo: " + respostaaviso[0].placa.toUpperCase() + "\n\n Agende sua troca conosco para preservar a vida útil do seu motor!";
+          let number = "55" + respostaaviso[0].telefone + "@c.us";
+          mandarmsg(number, menssage)
+    }
+  })
+
+  async function mandarmsg(telefone, mensagem){
+    // client.sendText(telefone, mensagem)
+    // .then((result) =>{console.log('Result: ', result);})
+    // .catch((erro) => {
+    //   console.error('Error when sending: ', erro);
+    //   let aux = telefone.substr(0, 4);
+    //   let aux1 = telefone.substr(5);
+    //   let corrigido = aux + aux1;
+    //   client.sendText(corrigido, mensagem)
+    //   .then((result) =>{console.log('Result: ', result);})
+    //   .catch((erro) => {
+    //     console.error('Error when sending: ', erro)
+    //     let aux = telefone.substr(0, 4);
+    //     let aux1 = telefone.substr(5);
+    //     let corrigido = aux + '9' + aux1;
+    //     client.sendText(corrigido, mensagem)
+    //   .then((result) =>{console.log('Result: ', result);})
+    //   .catch((erro) => {
+    //     console.error('Error when sending: ', erro)});
+    //   });
+    // });
+
+}
