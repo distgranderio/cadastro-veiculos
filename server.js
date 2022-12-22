@@ -14,7 +14,7 @@ var __dirname = path.dirname(__filename) + "/views";
 var caminhopadrao = path.dirname(__filename);
 
 app.use((req, res, next) => {
-    console.log(req.url);
+  //  console.log(req.url);
     next();
   })
 

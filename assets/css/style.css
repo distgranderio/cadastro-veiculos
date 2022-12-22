@@ -4,7 +4,10 @@ body {
     height: 100%;
 }
 table a{
-  text-decoration: underline;
+  text-decoration: none!important;
+}
+a{
+  text-decoration: none!important;
 }
 .footer h3, footer h3{
   font-family: 'Lobster', cursive;

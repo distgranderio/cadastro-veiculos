@@ -15,6 +15,7 @@ async function carregarTrocas(){
 
 function preencheformulario(id, placa, modelo, data, cliente){
 
+    document.querySelector(".nenhum").style.display = "none";
 
     let gdata = data.split("T");
     let auxdata = gdata[0].split("-");
@@ -63,6 +64,8 @@ async function pesquisando(event){
     }
 
     let pesquisa = document.querySelector("#termo").value;
+
+    document.querySelector(".nenhum").style.display = "block";
 
     if (pesquisa == "") {
         carregarTrocas();
