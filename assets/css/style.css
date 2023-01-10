@@ -33,10 +33,13 @@ footer a:hover{
 }
 .qtd{
   text-align-last: center;
-  margin-top: 45px;
   font-weight: 700;
   font-size: 16pt;
 }
+.qtd:nth-child(2){
+  margin-top: 45px;
+}
+
 @media (min-width: 1200px){
   .container{
     max-width: 850px!important;

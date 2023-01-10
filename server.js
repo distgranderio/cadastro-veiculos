@@ -65,6 +65,25 @@ app.get('/', (req, res) => {
 
 
    })
+
+   app.get('/qtd1', async (req, res) => {
+    let qtdade = await database.getAll1();
+    res.send([{quantidade: qtdade.length}]);
+
+
+   })
+   app.get('/qtd1', async (req, res) => {
+    let qtdade = await database.getAll1();
+    res.send([{quantidade: qtdade.length}]);
+
+
+   })
+   app.get('/qtd2', async (req, res) => {
+    let qtdade = await database.getAllh();
+    res.send([{quantidade: qtdade.length}]);
+
+
+   })
    app.get('/trocas', async (req, res) => {
    res.send(await database.getAll()); 
    })
@@ -127,18 +146,72 @@ app.get('/', (req, res) => {
         let rcilindradas = document.querySelectorAll("td")[11].textContent;
         let rpotencia = document.querySelectorAll("td")[13].textContent;
         let rCombustivel = document.querySelectorAll("td")[15].textContent;
-  
-        var campos = {
-          "marca": rmarca,
-          "modelo": rmodelo,
-          "AnoModelo": rAnoModelo,
-          "cor": rcor,
-          "cilindradas": rcilindradas,
-          "potencia": rpotencia,
-          "Combustivel": rCombustivel
-        };
-  
-        return campos;
+        if(rCombustivel.slice(0, 4) === "****") {
+          let rCombustivel1 = document.querySelectorAll("td")[13].textContent;
+          let rcilindradas1 = document.querySelectorAll("td")[9].textContent;
+          let rpotencia1 = document.querySelectorAll("td")[11].textContent;
+          let rcor1 = document.querySelectorAll("td")[7].textContent;
+
+          var campos = {
+            "marca": rmarca,
+            "modelo": rmodelo,
+            "AnoModelo": rAnoModelo,
+            "cor": rcor1,
+            "cilindradas": rcilindradas1,
+            "potencia": rpotencia1,
+            "Combustivel": rCombustivel1
+          };
+    
+          return campos;
+        }else if(rcor.slice(0, 4) === "****"){
+          let rCombustivel2 = document.querySelectorAll("td")[7].textContent;
+          let rcor2 = "N/A";
+          let rcilindradas2 = "N/A";
+          let rpotencia2 = "N/A";
+
+          var campos = {
+            "marca": rmarca,
+            "modelo": rmodelo,
+            "AnoModelo": rAnoModelo,
+            "cor": rcor2,
+            "cilindradas": rcilindradas2,
+            "potencia": rpotencia2,
+            "Combustivel": rCombustivel2
+          };
+    
+          return campos;
+
+        }else if(!isNaN(rcor)){
+          let rcilindradas3 = "N/A";
+          let rcor3 = document.querySelectorAll("td")[9].textContent;
+
+          var campos = {
+            "marca": rmarca,
+            "modelo": rmodelo,
+            "AnoModelo": rAnoModelo,
+            "cor": rcor3,
+            "cilindradas": rcilindradas3,
+            "potencia": rpotencia,
+            "Combustivel": rCombustivel
+          };
+    
+          return campos;
+
+        }else{
+
+          var campos = {
+            "marca": rmarca,
+            "modelo": rmodelo,
+            "AnoModelo": rAnoModelo,
+            "cor": rcor,
+            "cilindradas": rcilindradas,
+            "potencia": rpotencia,
+            "Combustivel": rCombustivel
+          };
+    
+          return campos;
+        }
+
   
       });
       await browser.close();

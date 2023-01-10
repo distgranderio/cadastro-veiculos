@@ -75,5 +75,47 @@ async function qtd(){
 
 async function preencheformulario(qtd){
 
-    document.querySelector(".qtd").textContent = qtd + " veículos cadastrados";
+    document.querySelector("#alltrocas").textContent = qtd + " veículos cadastrados";
+}
+
+qtd1();
+
+
+async function qtd1(){
+ 
+    fetch('/qtd1')
+        .then((res) => res.json())
+        .then((res) => {
+            for (qtdade of res) {
+                preencheformulario1(qtdade.quantidade);
+            }
+
+        })
+
+}
+
+async function preencheformulario1(qtd){
+
+    document.querySelector("#all").textContent = qtd + " trocas realizadas no total";
+}
+
+qtd2();
+
+
+async function qtd2(){
+ 
+    fetch('/qtd2')
+        .then((res) => res.json())
+        .then((res) => {
+            for (qtdade of res) {
+                preencheformulario2(qtdade.quantidade);
+            }
+
+        })
+
+}
+
+async function preencheformulario2(qtd){
+
+    document.querySelector("#allhoje").textContent = qtd + " trocas realizadas hoje";
 }

@@ -28,6 +28,16 @@ database.getAll = async function () {
 
   return rows;
 }
+database.getAll1 = async function () {
+  let [rows, fields] = await database.con.execute('SELECT * FROM carros');
+
+  return rows;
+}
+database.getAllh = async function () {
+  let [rows, fields] = await database.con.execute("SELECT * FROM carros where data = DATE_FORMAT((NOW()), '%Y-%m-%d')");
+
+  return rows;
+}
 
 database.getAllv = async function () {
   let [rows, fields] = await database.con.execute("SELECT * FROM carros WHERE NOT aviso = 1 AND DATE_FORMAT((data), '%Y-%m-%d') <= DATE_FORMAT(DATE_ADD(NOW( ), INTERVAL -1 YEAR), '%Y-%m-%d') ORDER BY placa asc");
